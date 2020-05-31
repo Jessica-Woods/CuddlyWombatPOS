@@ -25,6 +25,8 @@
                 <span class="grid-table--col-4">Pick Up</span>
                 <span class="grid-table--col-5">Destination</span>
                 <span class="grid-table--col-6">Status</span>
+                <span class="grid-table--col-7">Created At</span>
+                <span class="grid-table--col-8">In Kitchen At</span>
             </div>
 
             <div class="grid-table--row" th:each="order : ${activeOrders}">
@@ -34,7 +36,9 @@
                 <span class="grid-table--col-4" th:text="${order.pickUpOrder}" />
                 <span class="grid-table--col-5" th:text="${order.destination}" />
                 <span class="grid-table--col-6" th:text="${order.status.displayValue}" />
-                <a class="grid-table--col-7 primary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
+                <span class="grid-table--col-7" th:text="${order.getCreatedTimeString()}" />
+                <span class="grid-table--col-8" th:text="${order.getKitchenTimeString()}" />
+                <a class="grid-table--col-9 primary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
             </div>
         </div>
 
@@ -50,6 +54,7 @@
                 <span class="grid-table--col-4">Pick Up</span>
                 <span class="grid-table--col-5">Destination</span>
                 <span class="grid-table--col-6">Status</span>
+                <span class="grid-table--col-7">Completed At</span>
             </div>
             <div class="grid-table--row" th:each="order : ${inActiveOrders}">
                 <span class="grid-table--col-1" th:text="${order.id}"/>
@@ -58,7 +63,8 @@
                 <span class="grid-table--col-4" th:text="${order.pickUpOrder}" />
                 <span class="grid-table--col-5" th:text="${order.destination}" />
                 <span class="grid-table--col-6" th:text="${order.status.displayValue}" />
-                <a class="grid-table--col-7 primary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
+                <span class="grid-table--col-7" th:text="${order.getCompletedTimeString()}" />
+                <a class="grid-table--col-8 primary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
             </div>
         </div>
     </section>
@@ -77,7 +83,7 @@
             <label for="destination">Destination</label>
             <input id="destination" class="grid-form--input" name="destination" type="text" placeholder="Table 10" />
 
-            <button class="grid-form--input primary-button" type="submit">Submit</button>
+            <button class="grid-form--input primary-button" type="submit">Create</button>
 
         </form>
     </section>
