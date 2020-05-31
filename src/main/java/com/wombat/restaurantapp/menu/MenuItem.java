@@ -20,6 +20,7 @@ public class MenuItem {
     private List<OrderItem> orderItems;
 
     protected MenuItem() {}
+
     public MenuItem(String itemName, double itemCost){
         this.itemName = itemName;
         this.itemCost = itemCost;
@@ -42,6 +43,9 @@ public class MenuItem {
     public List<OrderItem> getOrderItems() { return orderItems; }
 
     // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setItemName(String itemName) { this.itemName = itemName; }
+    public void setItemCost(double itemCost) { this.itemCost = itemCost; }
     public void update(MenuItem other) {
         itemName = other.itemName;
         itemCost = other.itemCost;
