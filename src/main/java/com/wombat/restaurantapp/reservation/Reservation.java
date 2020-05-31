@@ -2,11 +2,13 @@ package com.wombat.restaurantapp.reservation;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,9 +24,11 @@ public class Reservation {
     private String phoneNumber;
     private int numberOfPeople;
 
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime time;
 
