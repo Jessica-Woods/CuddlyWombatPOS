@@ -18,10 +18,11 @@
             <div class="grid-table--row grid-table--header">
                 <span class="grid-table--col-1">Order ID</span>
                 <span class="grid-table--col-2">Items</span>
-                <span class="grid-table--col-3">Cashier</span>
-                <span class="grid-table--col-4">Pick Up</span>
-                <span class="grid-table--col-5">Destination</span>
-                <span class="grid-table--col-6">Status</span>
+                <span class="grid-table--col-3">Notes</span>
+                <span class="grid-table--col-4">Cashier</span>
+                <span class="grid-table--col-5">Pick Up</span>
+                <span class="grid-table--col-6">Destination</span>
+                <span class="grid-table--col-7">Status</span>
             </div>
 
             <div class="grid-table--row" th:each="order : ${orders}">
@@ -31,12 +32,13 @@
                         <li th:each="item : ${order.orderItems}" th:text="${item.quantity} + 'x ' + ${item.menuItem.itemName}" />
                     </ul>
                 </span>
-                <span class="grid-table--col-3" th:text="${order.employee}" />
-                <span class="grid-table--col-4" th:text="${order.pickUpOrder}" />
-                <span class="grid-table--col-5" th:text="${order.destination}" />
-                <span class="grid-table--col-6" th:text="${order.status.displayValue}" />
-                <a class="grid-table--col-7 primary-button" th:href="'/kitchen/' + ${order.id} + '/set-status?newStatus=COMPLETED'">Complete Order</a>
-                <a class="grid-table--col-8 secondary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
+                <span class="grid-table--col-3 multiline" th:text="${order.orderNotes}" />
+                <span class="grid-table--col-4" th:text="${order.employee}" />
+                <span class="grid-table--col-5" th:text="${order.pickUpOrder}" />
+                <span class="grid-table--col-6" th:text="${order.destination}" />
+                <span class="grid-table--col-7" th:text="${order.status.displayValue}" />
+                <a class="grid-table--col-8 primary-button" th:href="'/kitchen/' + ${order.id} + '/set-status?newStatus=COMPLETED'">Complete Order</a>
+                <a class="grid-table--col-9 secondary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
             </div>
         </div>
     </section>

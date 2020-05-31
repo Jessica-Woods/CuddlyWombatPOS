@@ -18,6 +18,8 @@ public class Order {
 
     private String destination;
 
+    private String orderNotes;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
@@ -26,10 +28,11 @@ public class Order {
 
     protected Order() {}
 
-    public Order(String employee, Boolean pickUpOrder, String destination) {
+    public Order(String employee, Boolean pickUpOrder, String destination, String orderNotes) {
         this.employee = employee;
         this.pickUpOrder = pickUpOrder;
         this.destination = destination;
+        this.orderNotes = orderNotes;
         this.status = OrderStatus.PENDING;
     }
 
@@ -57,11 +60,13 @@ public class Order {
     public String getTotalString() {
         return String.format("$%.2f", getTotal());
     }
+    public String getOrderNotes() { return orderNotes; }
     public OrderStatus getStatus() { return status; }
 
     public void setEmployee(String employee) { this.employee = employee; }
     public void setPickUpOrder(Boolean pickUpOrder) { this.pickUpOrder = pickUpOrder; }
     public void setDestination(String destination) { this.destination = destination; }
+    public void setOrderNotes(String orderNotes) {this.orderNotes = orderNotes;}
     public void setStatus(OrderStatus status) { this.status = status; }
 
 

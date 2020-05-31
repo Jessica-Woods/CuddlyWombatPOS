@@ -20,6 +20,7 @@
         </section>
 
         <section class="col-side">
+            <h1 th:text="'Order Number: ' + ${order.id}"></h1>
             <h1 th:text="'Total: ' + ${order.totalString}"></h1>
 
             <div class="selected-item" th:each="orderItem : ${order.orderItems}">
@@ -34,6 +35,17 @@
             <a th:if="${order.status == T(com.wombat.restaurantapp.order.OrderStatus).PENDING}" th:href="'/orders/' + ${order.id} + '/pay'" class="primary-button">Pay for Order</a>
             <a th:if="${order.status == T(com.wombat.restaurantapp.order.OrderStatus).IN_KITCHEN}" th:href="'/orders/' + ${order.id} + '/set-status?newStatus=COMPLETED'" class="primary-button">Complete Order</a>
             <a th:if="${order.status != T(com.wombat.restaurantapp.order.OrderStatus).COMPLETED && order.status != T(com.wombat.restaurantapp.order.OrderStatus).CANCELLED}" th:href="'/orders/' + ${order.id} + '/set-status?newStatus=CANCELLED'" class="secondary-button">Cancel Order</a>
+
+
+            <br><br>
+            <form class="grid-table--row" th:action="'/orders/' + ${order.id} + '/add-note'" method="POST">
+                <div class="grid-table--col-1">(Create Order Note)</div>
+                <textarea class="grid-table--col-2 large-textarea" name="orderNote" th:text=" ${order.orderNotes}" />
+
+                <button class="grid-table--col-3 primary-button" type="submit">Save</button>
+            </form>
+
+
         </section>
     </div>
 </body>

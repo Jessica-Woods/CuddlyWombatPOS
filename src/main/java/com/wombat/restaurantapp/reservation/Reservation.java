@@ -20,8 +20,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String phoneNumber;
+
+    @NotNull
     private int numberOfPeople;
 
     @NotNull

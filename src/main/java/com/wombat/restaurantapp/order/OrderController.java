@@ -125,4 +125,12 @@ public class OrderController {
 
         return new RedirectView("/orders/" + order.getId());
     }
+
+    @PostMapping("/orders/{orderId}/add-note")
+    public RedirectView addOrderNote(@PathVariable("orderId") Long id, @RequestParam String orderNote) {
+        Order order = orderDAO.findById(id).get();
+        order.setOrderNotes(orderNote);
+        orderDAO.save(order);
+        return new RedirectView("/orders/" + order.getId());
+    }
 }

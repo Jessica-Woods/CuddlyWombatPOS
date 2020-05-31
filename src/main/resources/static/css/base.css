@@ -83,6 +83,15 @@ nav a:hover {
     color: white;
 }
 
+.large-textarea {
+    width: 300px;
+    height: 150px;
+}
+
+.multiline {
+    white-space: pre !important;
+}
+
 .one-column {
     display: grid;
     grid-template-columns: 1fr;
