@@ -95,7 +95,9 @@ public class ReportController {
         for(MenuItem item : menuItems) {
             TopItem topItem = new TopItem(item, 0);
             for(OrderItem orderItem : item.getOrderItems()) {
-                topItem.setCount(topItem.getCount() + orderItem.getQuantity());
+                if (orderItem.getOrder().getStatus() == OrderStatus.COMPLETED){
+                    topItem.setCount(topItem.getCount() + orderItem.getQuantity());
+                }
             }
 
             if(topItem.getCount() > 0) {

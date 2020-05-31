@@ -16,7 +16,7 @@ public class MenuItem {
 
     private double itemCost;
 
-    @OneToMany(mappedBy = "menuItem")
+    @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
     protected MenuItem() {}
