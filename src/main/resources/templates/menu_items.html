@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Menu</title>
+    <link href="/css/grid_table.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<header th:replace="fragments/base :: banner" />
+<nav th:replace="fragments/base :: nav" />
+
+<section class="one-column">
+    <section class="one-column--main">
+
+        <h2>All Menu Items:</h2>
+        <div class="grid-table">
+            <div class="grid-table--row grid-table--header">
+                <div class="grid-table--col-2">Name</div>
+                <div class="grid-table--col-3">Cost</div>
+            </div>
+
+            <form class="grid-table--row" th:action="'/menu-items/'+${menuItem.id} + '/edit'" method="POST" th:each="menuItem : ${menuItems}">
+                <label class="grid-table--col-1" th:text="'Item ' +${menuItem.id}"/>
+
+                <input class="grid-table--col-2" name="itemName" type="text" th:value="${menuItem.itemName}" />
+                <input class="grid-table--col-3" name="itemCost" type="text" th:value="${menuItem.itemCost}" />
+
+                <button class="grid-table--col-4 primary-button" type="submit">Save</button>
+                <button class="grid-table--col-5 secondary-button" type="submit" th:formaction="'/menu-items/'+${menuItem.id} + '/delete'" formmethod="GET">Delete</button>
+            </form>
+
+            <form class="grid-table--row" action="/menu-items" method="POST">
+                <label class="grid-table--col-1">(Create New)</label>
+
+                <input class="grid-table--col-2" name="itemName" type="text" />
+                <input class="grid-table--col-3" name="itemCost" type="text" />
+                <button class="grid-table--col-4 primary-button" type="submit">Create</button>
+            </form>
+        </div>
+    </section>
+</section>
+</body>
+</html>

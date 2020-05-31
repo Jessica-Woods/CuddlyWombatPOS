@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Orders</title>
+    <link href="/css/grid_table.css" type="text/css" rel="stylesheet" />
+    <link href="/css/grid_form.css" type="text/css" rel="stylesheet" />
+
+</head>
+<body>
+
+<header th:replace="fragments/base :: banner" />
+<nav th:replace="fragments/base :: nav" />
+
+<div class="two-column-sidebar">
+    <section class="col-main">
+
+        <h2>Current Orders:</h2>
+        <div class="grid-table">
+            <div class="grid-table--row grid-table--header">
+                <span class="grid-table--col-1">Order ID</span>
+                <span class="grid-table--col-2">Cashier</span>
+                <span class="grid-table--col-3">Total</span>
+                <span class="grid-table--col-4">Pick Up</span>
+                <span class="grid-table--col-5">Destination</span>
+                <span class="grid-table--col-6">Status</span>
+            </div>
+
+            <div class="grid-table--row" th:each="order : ${activeOrders}">
+                <span class="grid-table--col-1" th:text="${order.id}"/>
+                <span class="grid-table--col-2" th:text="${order.employee}" />
+                <span class="grid-table--col-3" th:text="${order.totalString}" />
+                <span class="grid-table--col-4" th:text="${order.pickUpOrder}" />
+                <span class="grid-table--col-5" th:text="${order.destination}" />
+                <span class="grid-table--col-6" th:text="${order.status.displayValue}" />
+                <a class="grid-table--col-7 primary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+
+        <h2>Completed Orders:</h2>
+        <div class="grid-table">
+            <div class="grid-table--row grid-table--header">
+                <span class="grid-table--col-1">Order ID</span>
+                <span class="grid-table--col-2">Cashier</span>
+                <span class="grid-table--col-3">Total</span>
+                <span class="grid-table--col-4">Pick Up</span>
+                <span class="grid-table--col-5">Destination</span>
+                <span class="grid-table--col-6">Status</span>
+            </div>
+            <div class="grid-table--row" th:each="order : ${inActiveOrders}">
+                <span class="grid-table--col-1" th:text="${order.id}"/>
+                <span class="grid-table--col-2" th:text="${order.employee}" />
+                <span class="grid-table--col-3" th:text="${order.totalString}" />
+                <span class="grid-table--col-4" th:text="${order.pickUpOrder}" />
+                <span class="grid-table--col-5" th:text="${order.destination}" />
+                <span class="grid-table--col-6" th:text="${order.status.displayValue}" />
+                <a class="grid-table--col-7 primary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="col-side">
+        <h2>New Order:</h2>
+        <form class="grid-form" action="/orders" method="POST">
+            <label for="employee">Employee</label>
+            <select id="employee" class="grid-form--input" name="employee">
+                <option th:each="employee : ${employees}" th:text="${employee.name}" />
+            </select>
+
+            <label for="pickUpOrder">Pick Up Order</label>
+            <input id="pickUpOrder" class="grid-form--input" name="pickUpOrder" type="checkbox" />
+
+            <label for="destination">Destination</label>
+            <input id="destination" class="grid-form--input" name="destination" type="text" placeholder="Table 10" />
+
+            <button class="grid-form--input primary-button" type="submit">Submit</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>

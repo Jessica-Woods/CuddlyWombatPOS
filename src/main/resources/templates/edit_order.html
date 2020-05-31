@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Edit Order</title>
+</head>
+<body>
+    <header th:replace="fragments/base :: banner" />
+    <nav th:replace="fragments/base :: nav" />
+
+    <div class="two-column-sidebar">
+        <section id="menu-items" class="col-main">
+            <a class="menu-item" th:each="menuItem : ${menuItems}" th:href="'/orders/' + ${order.id} + '/add-menu-item?menuItemId=' + ${menuItem.id}">
+                <div >
+                    <p th:text="${menuItem.itemName}"/>
+                    <p th:text="${menuItem.itemCostString}"/>
+                </div>
+            </a>
+        </section>
+
+        <section class="col-side">
+            <h1 th:text="'Total: ' + ${order.totalString}"></h1>
+
+            <div class="selected-item" th:each="orderItem : ${order.orderItems}">
+                <p class="selected-item-quantity" th:text="${orderItem.quantity} + 'x'" />
+                <p class="selected-item-name" th:text="${orderItem.menuItem.itemName}" />
+                <p class="selected-item-cost" th:text="${orderItem.costString()}" />
+                <a th:href="'/orders/' + ${order.id} + '/add-menu-item?menuItemId=' + ${orderItem.menuItem.id}" class="selected-item-add">+</a>
+                <a th:href="'/orders/' + ${order.id} + '/delete-menu-item?menuItemId=' + ${orderItem.menuItem.id}" class="selected-item-delete">-</a>
+            </div>
+
+            <p th:text="'Status: ' + ${order.status.displayValue}" />
+            <a th:if="${order.status == T(com.wombat.restaurantapp.order.OrderStatus).PENDING}" th:href="'/orders/' + ${order.id} + '/pay'" class="primary-button">Pay for Order</a>
+            <a th:if="${order.status == T(com.wombat.restaurantapp.order.OrderStatus).IN_KITCHEN}" th:href="'/orders/' + ${order.id} + '/set-status?newStatus=COMPLETED'" class="primary-button">Complete Order</a>
+            <a th:if="${order.status != T(com.wombat.restaurantapp.order.OrderStatus).COMPLETED && order.status != T(com.wombat.restaurantapp.order.OrderStatus).CANCELLED}" th:href="'/orders/' + ${order.id} + '/set-status?newStatus=CANCELLED'" class="secondary-button">Cancel Order</a>
+        </section>
+    </div>
+</body>
+</html>

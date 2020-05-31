@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Orders</title>
+    <link href="/css/grid_table.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+<header th:replace="fragments/base :: banner" />
+<nav th:replace="fragments/base :: nav" />
+
+<section class="one-column">
+    <section class="one-column--main">
+        <h2>Orders In Kitchen:</h2>
+        <div class="grid-table">
+            <div class="grid-table--row grid-table--header">
+                <span class="grid-table--col-1">Order ID</span>
+                <span class="grid-table--col-2">Items</span>
+                <span class="grid-table--col-3">Cashier</span>
+                <span class="grid-table--col-4">Pick Up</span>
+                <span class="grid-table--col-5">Destination</span>
+                <span class="grid-table--col-6">Status</span>
+            </div>
+
+            <div class="grid-table--row" th:each="order : ${orders}">
+                <span class="grid-table--col-1" th:text="${order.id}"/>
+                <span class="grid-table--col-2">
+                    <ul>
+                        <li th:each="item : ${order.orderItems}" th:text="${item.quantity} + 'x ' + ${item.menuItem.itemName}" />
+                    </ul>
+                </span>
+                <span class="grid-table--col-3" th:text="${order.employee}" />
+                <span class="grid-table--col-4" th:text="${order.pickUpOrder}" />
+                <span class="grid-table--col-5" th:text="${order.destination}" />
+                <span class="grid-table--col-6" th:text="${order.status.displayValue}" />
+                <a class="grid-table--col-7 primary-button" th:href="'/kitchen/' + ${order.id} + '/set-status?newStatus=COMPLETED'">Complete Order</a>
+                <a class="grid-table--col-8 secondary-button" th:href="'/orders/' + ${order.id}">View / Edit</a>
+            </div>
+        </div>
+    </section>
+</section>
+
+</body>
+</html>

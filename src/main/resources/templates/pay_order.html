@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Processing...</title>
+</head>
+<body>
+<header th:replace="fragments/base :: banner" />
+<nav th:replace="fragments/base :: nav" />
+
+<section class="one-column">
+    <section class="one-column--main">
+        <h1>Processing Payment...</h1>
+    </section>
+</section>
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+    var orderId = /*[[${orderId}]]*/ 'Order Id';
+    /*]]>*/
+
+    window.setTimeout(function(){
+        window.location.href = "/orders/" + orderId + "/set-status?newStatus=IN_KITCHEN";
+    }, 1000);
+</script>
+
+</body>
+</html>

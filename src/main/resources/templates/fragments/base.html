@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" th:remove="tag">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jessica Gale"  />
+    <link href="/css/base.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <header id="banner" th:fragment="banner">
+        <h1>Cuddly Wombat</h1>
+    </header>
+
+    <nav th:fragment="nav">
+        <a href="/orders">Orders</a>
+        <a href="/reservations">Reservations</a>
+        <a href="/kitchen">Kitchen</a>
+        <a href="/menu-items">Menu</a>
+        <a href="/reports">Reports</a>
+    </nav>
+
+    <footer th:fragment="footer">
+        <p>Jessica Gale - 101367036</p>
+    </footer>
+</body>
+</html>

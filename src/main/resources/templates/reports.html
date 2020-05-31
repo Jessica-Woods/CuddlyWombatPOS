@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Reports</title>
+    <link href="/css/grid_table.css" type="text/css" rel="stylesheet" />
+
+</head><body>
+<header th:replace="fragments/base :: banner" />
+<nav th:replace="fragments/base :: nav" />
+
+
+<section class="one-column">
+    <section class="one-column--main">
+        <h2>Reports:</h2>
+        <h3 th:text="'Total Number of Items Sold: ' + ${totalNumberItemsSold}"/>
+        <h3 th:text="'Total Cost of Items Sold: ' + ${totalCostItemsSold}"/>
+        <h3 th:text="'Total Number of Orders: ' + ${totalNumberOrders}"/>
+        <h3 th:text="'Total Cancellations: ' + ${totalCancellations}"/>
+        <h3 th:text="'Total Reservations: ' + ${totalReservations}" />
+        <h3>Most Popular Items:</h3>
+        <ul>
+            <li th:each="item : ${topItems}" th:text="${item.menuItem.itemName} + ' (' + ${item.count} + ' Sold)'" />
+        </ul>
+    </section>
+</section>
+
+</body>
+</html>

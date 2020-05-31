@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/base :: head" />
+
+    <title>Reservations</title>
+    <link href="/css/grid_table.css" type="text/css" rel="stylesheet" />
+
+</head><body>
+<header th:replace="fragments/base :: banner" />
+<nav th:replace="fragments/base :: nav" />
+
+<article>
+</article>
+<sec>
+
+<section class="one-column">
+    <section class="one-column--main">
+        <h2>All Reservations:</h2>
+        <div class="grid-table">
+            <div class="grid-table--row grid-table--header">
+                <span class="grid-table--col-1">ID</span>
+                <span class="grid-table--col-2">Name</span>
+                <span class="grid-table--col-3">Phone Number</span>
+                <span class="grid-table--col-4"># People</span>
+                <span class="grid-table--col-5">Date</span>
+                <span class="grid-table--col-6">Time</span>
+            </div>
+
+            <div class="grid-table--row" th:each="reservation : ${reservations}">
+                <span class="grid-table--col-1" th:text="${reservation.id}" />
+                <span class="grid-table--col-2" th:text="${reservation.name}" />
+                <span class="grid-table--col-3" th:text="${reservation.phoneNumber}" />
+                <span class="grid-table--col-4" th:text="${reservation.numberOfPeople}" />
+                <span class="grid-table--col-5" th:text="${reservation.AESTDate}" />
+                <span class="grid-table--col-6" th:text="${reservation.AESTTime}" />
+
+                <a class="grid-table--col-7 secondary-button" type="submit" th:href="'/reservations/'+${reservation.id} + '/delete'">Delete</a>
+            </div>
+
+            <form class="grid-table--row" action="/reservations" method="POST">
+                <div class="grid-table--col-1">(Create New)</div>
+                <input class="grid-table--col-2" name="name" type="text" />
+                <input class="grid-table--col-3" name="phoneNumber" type="text" />
+                <input class="grid-table--col-4" name="numberOfPeople" type="text" />
+                <input class="grid-table--col-5" name="date" type="date" />
+                <input class="grid-table--col-6" name="time" type="time">
+
+                <button class="grid-table--col-7 primary-button" type="submit">Create</button>
+            </form>
+        </div>
+    </section>
+</section>
+</body>
+</html>
